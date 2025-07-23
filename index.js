@@ -68,6 +68,9 @@ function GameBoard(){
     }
 
 
+    //A function that displays the gameboard to the console
+    //Inputs:
+    //Return:
     const displayBoard = () => {
 
         let firstRow = board[0].map(cell => cell.getValue());
