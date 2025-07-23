@@ -23,7 +23,7 @@ function Cell(){
 
 }
 
-
+//TODO: MAKE THIS A MODULE INSTEAD OF A FACTORY
 // The Gameboard represents the tic tac toe board
 // it containts a 2D array of Cells.
 function GameBoard(){
@@ -127,14 +127,47 @@ function GameBoard(){
 }
 
 
-//Test Code for displayBoard()
-board = GameBoard();
+//The GameController controlls the flow of the game and creates the players
+function GameController(playerOneName = "Player One", playerTwoName = "Player Two"){
+
+    board = GameBoard()
+
+    players = [
+        {
+            name: playerOneName,
+            token: "X"
+        },
+        {
+            name: playerTwoName,
+            token: "O"
+        }
+    ];
+
+    let currPlayer = players[0];
+
+    //A function that switches the active player
+    //Inputs: none
+    //Return: none
+    const switchPlayerTurn = () => {
+
+        //Can we just check which player is active and then invert it?
+        if (currPlayer == players[0]){
+            currPlayer = players[1];
+        }else if (currPlayer == players[1]){
+            currPlayer = players[0];
+        }
+
+    }
+
+    //Optional probably not needed
+    const getCurrentPlayer = () => {
+        return currPlayer;
+    }
 
 
-board.addMarker(0,0, "O");
-board.addMarker(1,1, "O");
-board.addMarker(1,2, "T");
+    return {switchPlayerTurn, getCurrentPlayer}
 
-board.displayBoard(); 
+}
 
-console.log(board.checkWin());
+
+
