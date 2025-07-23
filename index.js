@@ -88,27 +88,53 @@ function GameBoard(){
     //Return: "X" or "O" or null
     const checkWin = () => {
 
-        //Check rows
-        if ((board[0][0] == board[0][1] == board[0][2]) || (board[1][0] == board[1][1] == board[1][2]) || (board[2][0] == board[2][1] == board[2][2])){
-            //return winner somehow
+        //Defines the all possible winning lines
+        const lines = [
+
+            // Rows
+            [[0, 0], [0, 1], [0, 2]],
+            [[1, 0], [1, 1], [1, 2]],
+            [[2, 0], [2, 1], [2, 2]],
+            // Columns
+            [[0, 0], [1, 0], [2, 0]],
+            [[0, 1], [1, 1], [2, 1]],
+            [[0, 2], [1, 2], [2, 2]],
+            // Diagonals
+            [[0, 0], [1, 1], [2, 2]],
+            [[0, 2], [1, 1], [2, 0]],
+        ]
+
+        //Loop through the winning lines above
+        for (let line of lines) {
+            const [a, b, c] = line;
+            //Accesses the board at coordinate a ([0,0], or [1, 0] , or [2, 0])
+            const valA = board[a[0]][a[1]].getValue(); 
+            const valB = board[b[0]][b[1]].getValue();
+            const valC = board[c[0]][c[1]].getValue();
+
+            //valA valB and valC together represent any given line on the board 
+            
+            //check if this line is winning
+            if (valA && valA === valB && valA === valC) {
+                return valA; // "X" or "O"
+            }
         }
 
-        //Check cols
-        if ((board[0][0] == board[1][0] == board[2][0]) || (board[0][1] == board[1][1] == board[2][1]) || (board[0][2] == board[1][2] == board[2][2])){
-            //return winner somehow
-        }
-
+        return null;
     }
 
-    return {getBoard, addMarker, displayBoard};
+    return {getBoard, addMarker, displayBoard, checkWin};
 }
 
 
 //Test Code for displayBoard()
 board = GameBoard();
 
-board.displayBoard();
 
-board.addMarker(1,2, "X");
+board.addMarker(0,0, "O");
+board.addMarker(1,1, "O");
+board.addMarker(1,2, "T");
 
 board.displayBoard(); 
+
+console.log(board.checkWin());
