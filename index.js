@@ -7,7 +7,7 @@
 
 function Cell(){
 
-    let value = null;
+    let value = "empty";
 
     //takes in a player token and changes it's value
     const setValue = (player) => {
@@ -41,11 +41,15 @@ function GameBoard(){
     }
 
     //A fuction to return the board (for later UI display)
+    //Inputs:
+    //Return:
     const getBoard = () => {
         return board;
     }
 
-    //A fucntion that adds a player marker to the specified x, y of the gameboard
+    //A function that adds a player marker to the specified x, y of the gameboard
+    //Inputs:
+    //Return:
     const addMarker = (x, y, marker)  => {
 
         //If x or y is out of bounds throw an error
@@ -56,25 +60,34 @@ function GameBoard(){
         const cell = board[x][y];
 
         //If there is no marker already there
-        if (cell.getValue() == null){
+        if (cell.getValue() == "empty"){
             cell.setValue(marker);
         }else{
             throw new Error("Marker cannot be placed on an existing marker");
         }
     }
 
-    return {getBoard, addMarker};
+
+    const displayBoard = () => {
+
+        let firstRow = board[0].map(cell => cell.getValue());
+        let secondRow = board[1].map(cell => cell.getValue());
+        let thirdRow = board[2].map(cell => cell.getValue());
+        
+        console.log(`Row 1: ${firstRow}`);
+        console.log(`Row 2: ${secondRow}`);
+        console.log(`Row 3: ${thirdRow}`);
+    }
+
+    return {getBoard, addMarker, displayBoard};
 }
 
 
-//Test Code for addMarker()
+//Test Code for displayBoard()
 board = GameBoard();
 
-board.addMarker(1, 1, "X");
-board.addMarker(2, 2, "O");
+board.displayBoard();
 
-for (let i = 0; i < 3; i++){
-    for (let j = 0; j < 3; j++){
-        console.log(board.getBoard()[i][j].getValue());
-    }
-}
+board.addMarker(1,2, "X");
+
+board.displayBoard();
