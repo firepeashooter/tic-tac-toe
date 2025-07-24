@@ -158,14 +158,22 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
         }
 
     }
+    
 
-    //Optional probably not needed
     const getCurrentPlayer = () => {
         return currPlayer;
     }
 
 
-    return {switchPlayerTurn, getCurrentPlayer}
+    const printNewRound = () => {
+        
+        board.displayBoard();
+        console.log(`${getCurrentPlayer().name}'s turn`);
+
+    }
+
+
+    return {switchPlayerTurn, getCurrentPlayer, printNewRound};
 
 }
 
