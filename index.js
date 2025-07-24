@@ -172,6 +172,7 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
 
     }
 
+
     const playRound = (row, col) => {
         
         board.addMarker(row, col, getCurrentPlayer().token);
@@ -179,7 +180,14 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
         if (board.checkWin() != null){
 
             //Win condition
+            winningToken = board.checkWin();
 
+            if (winningToken == "X"){
+                console.log(`Game Over! ${players[0].name} wins!`)
+            }else{
+                console.log(`Game Over! ${players[1].name} wins!`)
+
+            }
         }else{
 
             switchPlayerTurn();
@@ -189,17 +197,11 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
     }
 
 
-    return {switchPlayerTurn, getCurrentPlayer, printNewRound, playRound};
+    return {playRound};
 
 }
 
-controller = GameController();
 
-controller.printNewRound();
-
-controller.playRound(1, 1);
-controller.playRound(2, 2);
-controller.playRound(0, 0);
 
 
 
