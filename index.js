@@ -7,7 +7,7 @@
 
 function Cell(){
 
-    let value = "empty";
+    let value = null;
 
     //takes in a player token and changes it's value
     const setValue = (player) => {
@@ -60,7 +60,7 @@ function GameBoard(){
         const cell = board[x][y];
 
         //If there is no marker already there
-        if (cell.getValue() == "empty"){
+        if (cell.getValue() == null){
             cell.setValue(marker);
         }else{
             throw new Error("Marker cannot be placed on an existing marker");
@@ -158,7 +158,7 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
         }
 
     }
-    
+
 
     const getCurrentPlayer = () => {
         return currPlayer;
@@ -172,10 +172,34 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
 
     }
 
+    const playRound = (row, col) => {
+        
+        board.addMarker(row, col, getCurrentPlayer().token);
 
-    return {switchPlayerTurn, getCurrentPlayer, printNewRound};
+        if (board.checkWin() != null){
+
+            //Win condition
+
+        }else{
+
+            switchPlayerTurn();
+            printNewRound();
+        }
+        
+    }
+
+
+    return {switchPlayerTurn, getCurrentPlayer, printNewRound, playRound};
 
 }
+
+controller = GameController();
+
+controller.printNewRound();
+
+controller.playRound(1, 1);
+controller.playRound(2, 2);
+controller.playRound(0, 0);
 
 
 
