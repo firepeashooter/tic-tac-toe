@@ -197,11 +197,50 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
     }
 
 
-    return {playRound};
+    return {playRound, getCurrentPlayer, getBoard: board.getBoard};
 
 }
 
 
 
+function ScreenController(){
 
+    const game = GameController();
+    const playerTurnHeader = document.querySelector('.turn');
+    const boardDiv = document.querySelector('.board');
+    const rows = 3;
+    const cols = 3;
+
+    const updateScreen = () => {
+
+        const board = game.getBoard();
+        const currPlayer = game.getCurrentPlayer();
+
+        //display current player name
+        playerTurnHeader.textContent = currPlayer.name;
+
+        //clear the board
+        boardDiv.textContent = '';
+
+        //loop through the board and add the squares back to the boardDiv
+        for (let i = 0; i < rows; i++){
+            for (let j = 0; j < cols; j++){
+                const cellButton = document.createElement("div");
+
+                cellButton.classList.add("cell");
+                cellButton.textContent = board[i][j].getValue(); 
+                cellButton.dataset.row = i;
+                cellButton.dataset.col = j;
+                boardDiv.appendChild(cellButton);
+
+
+            }
+        }
+    }
+
+    //initially renders the screen
+    updateScreen();
+}
+
+ScreenController();
 
