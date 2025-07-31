@@ -45,6 +45,9 @@ body{
 
 .cell{
 
+    display:flex;
+    justify-content: center;
+    align-items: center;
     border: 4px solid black;
 }
 

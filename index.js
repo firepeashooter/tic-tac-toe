@@ -183,9 +183,9 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
             winningToken = board.checkWin();
 
             if (winningToken == "X"){
-                console.log(`Game Over! ${players[0].name} wins!`)
+                alert(`Game Over! ${players[0].name} wins!`)
             }else{
-                console.log(`Game Over! ${players[1].name} wins!`)
+                alert(`Game Over! ${players[1].name} wins!`)
 
             }
         }else{
@@ -228,7 +228,12 @@ function ScreenController(){
                 const cellButton = document.createElement("div");
 
                 cellButton.classList.add("cell");
-                cellButton.textContent = board[i][j].getValue(); 
+                
+                if (board[i][j].getValue() == "X"){
+                    cellButton.innerHTML = '<svg width="100" height="100" viewBox="0 0 100 100"> <line x1="20" y1="20" x2="80" y2="80" stroke="black" stroke-width="10"/><line x1="80" y1="20" x2="20" y2="80" stroke="black" stroke-width="10"/></svg>';
+                }else if (board[i][j].getValue() == "O"){
+                    cellButton.innerHTML = '<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" stroke="black" stroke-width="10" fill="none"/></svg>';
+                };
                 cellButton.dataset.row = i;
                 cellButton.dataset.col = j;
                 boardDiv.appendChild(cellButton);
