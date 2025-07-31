@@ -1,3 +1,25 @@
-h1{
-    color:red;
+
+body{
+    display:flex;
+    flex-direction: column;
+
+    margin: 0;
+    padding: 0;
+    height:100vh;
 }
+
+.header{
+    background-color: rosybrown;
+    flex:0.5;
+}
+
+.main{
+    background-color: green;
+    flex:3; 
+}
+
+.footer{
+    background-color: brown;
+    flex:0.5;
+}
+
