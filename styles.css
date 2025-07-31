@@ -30,12 +30,12 @@ body{
 }
 
 .turn{
-    color:red;
+    color: #0E90FF;
 }
 
 
 .alternate--player{
-    color: blue;
+    color: #FFA500;
 }
 
 .board{
