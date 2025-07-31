@@ -29,6 +29,15 @@ body{
     flex: 3; 
 }
 
+.turn{
+    color:red;
+}
+
+
+.alternate--player{
+    color: blue;
+}
+
 .board{
 
     display: grid;

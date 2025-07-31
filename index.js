@@ -219,6 +219,8 @@ function ScreenController(){
         const currPlayer = game.getCurrentPlayer();
 
         //display current player name
+
+        playerTurnHeader.classList.toggle("alternate--player");
         playerTurnHeader.textContent = currPlayer.name;
 
         //clear the board
