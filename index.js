@@ -238,6 +238,20 @@ function ScreenController(){
         }
     }
 
+    function clickHandelerBoard(e){
+
+        const selectedRow = parseInt(e.target.dataset.row);
+        const selectedCol = parseInt(e.target.dataset.col);
+
+        console.log(selectedRow);
+        console.log(selectedCol);
+
+        game.playRound(selectedRow, selectedCol);
+        updateScreen();
+    }
+
+    boardDiv.addEventListener("click", clickHandelerBoard);
+
     //initially renders the screen
     updateScreen();
 }
