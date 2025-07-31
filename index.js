@@ -184,9 +184,10 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
 
             if (winningToken == "X"){
                 alert(`Game Over! ${players[0].name} wins!`)
+                return true;
             }else{
                 alert(`Game Over! ${players[1].name} wins!`)
-
+                return true;
             }
         }else{
 
@@ -210,6 +211,7 @@ function ScreenController(){
     const boardDiv = document.querySelector('.board');
     const rows = 3;
     const cols = 3;
+    let gameOver = false;
 
     const updateScreen = () => {
 
@@ -245,13 +247,15 @@ function ScreenController(){
 
     function clickHandelerBoard(e){
 
+        if (gameOver){
+            return;
+        }
+        
         const selectedRow = parseInt(e.target.dataset.row);
         const selectedCol = parseInt(e.target.dataset.col);
 
-        console.log(selectedRow);
-        console.log(selectedCol);
 
-        game.playRound(selectedRow, selectedCol);
+        gameOver = game.playRound(selectedRow, selectedCol);
         updateScreen();
     }
 
