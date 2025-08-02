@@ -150,7 +150,7 @@ function GameBoard(){
         return null;
     }
 
-    return {getBoard, addMarker, displayBoard, checkWin, checkTie, resetBoard};
+    return {getBoard, addMarker, checkWin, checkTie, resetBoard};
 }
 
 
@@ -192,12 +192,12 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
     }
 
 
-    const printNewRound = () => {
+    // const printNewRound = () => {
         
-        board.displayBoard();
-        console.log(`${getCurrentPlayer().name}'s turn`);
+    //     board.displayBoard();
+    //     console.log(`${getCurrentPlayer().name}'s turn`);
 
-    }
+    // }
 
     const resetGame = () => {
         board.resetBoard();
@@ -240,7 +240,7 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
                 }
 
                 switchPlayerTurn();
-                printNewRound();
+                // printNewRound();
             }
         }else{
             return false;
