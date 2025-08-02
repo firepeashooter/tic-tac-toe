@@ -209,9 +209,11 @@ function ScreenController(){
     const game = GameController();
     const playerTurnHeader = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
+    const startButton = document.querySelector('.start--button');
     const rows = 3;
     const cols = 3;
     let gameOver = false;
+    let gameStart = false;
 
     const updateScreen = () => {
 
@@ -247,9 +249,23 @@ function ScreenController(){
         }
     }
 
+    const resetScreen = () => {
+        
+    }
+
+    function startGame() {
+        gameStart = true;
+        resetScreen();
+    }
+
     function clickHandelerBoard(e){
 
         if (gameOver){
+            gameStart = false;
+            return;
+        }
+
+        if (!gameStart){
             return;
         }
         
@@ -262,6 +278,7 @@ function ScreenController(){
     }
 
     boardDiv.addEventListener("click", clickHandelerBoard);
+    startButton.addEventListener("click", startGame);
 
     //initially renders the screen
     updateScreen();
