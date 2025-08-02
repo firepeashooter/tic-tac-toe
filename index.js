@@ -205,16 +205,18 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
             let winningToken = board.checkWin();
             let gameTie = board.checkTie();
             
-            if (gameTie == true){
-                alert(`Game Tie!`);
-                return true;
-            }
+            
 
             if (winningToken == "X"){
                 alert(`Game Over! ${players[0].name} wins!`)
                 return true;
-            }else{
+            }else if (winningToken == "O"){
                 alert(`Game Over! ${players[1].name} wins!`)
+                return true;
+            }
+
+            if (gameTie == true){
+                alert(`Game Tie!`);
                 return true;
             }
         }else{

@@ -1,4 +1,10 @@
 
+:root{
+    --background: #0f0e17;
+    --header: #fffffe;
+    --button: #ff8906;
+    --buttonText: #fffffe;
+}
 body{
     display:flex;
     flex-direction: column;
@@ -6,6 +12,19 @@ body{
     margin: 0;
     padding: 0;
     height:100vh;
+    background-color: var(--background);
+}
+
+h1{
+    color: var(--header);
+}
+
+h2{
+    color: var(--header);
+}
+
+h4{
+    color: var(--header);
 }
 
 .header{
@@ -14,7 +33,6 @@ body{
     justify-content: center;
     align-items: center;
     
-    border: 4px solid black;
     flex:0.3;
 }
 
@@ -24,7 +42,6 @@ body{
     justify-content: center;
     align-items: center;
     
-    border: 4px solid black;
     flex: 3; 
 }
 
@@ -34,7 +51,6 @@ body{
     justify-content: center;
     align-items: center;
 
-    border: 4px solid black;
 }
 
 .right{
@@ -47,8 +63,8 @@ body{
     border:none;
     width: 200px;
     height: 100px;
-    background-color: #444C56;
-    color:white;
+    background-color: var(--button);
+    color: var(--buttonText);
     font-size: 1.7rem;
     border-radius: 20px;
 }
@@ -107,8 +123,8 @@ body{
     border:none;
     width: 200px;
     height: 100px;
-    background-color: #444C56;
-    color:white;
+    background-color: var(--button);
+    color: var(--buttonText);
     font-size: 1.7rem;
     border-radius: 20px;
 }
@@ -119,10 +135,6 @@ body{
 
 .submit:active{
     background-color: #3A434C;
-}
-
-.turn{
-    color: #0E90FF;
 }
 
 
@@ -137,7 +149,7 @@ body{
     grid-template-columns: repeat(3, 1fr); 
     grid-template-rows: repeat(3, 1fr); 
 
-    border: 8px solid black;
+    border: 8px solid var(--header);
 
     width: 500px;
     height: 500px;
@@ -149,7 +161,7 @@ body{
     display:flex;
     justify-content: center;
     align-items: center;
-    border: 4px solid black;
+    border: 4px solid var(--header);
 }
 
 .footer{
@@ -158,7 +170,6 @@ body{
     justify-content: center;
     align-items: center;
     
-    border: 4px solid black;
     flex:0.3;
 }
 
