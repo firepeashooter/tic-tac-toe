@@ -96,6 +96,7 @@ function GameBoard(){
     }
 
     const checkTie = () => {
+        console.log(usedCells);
         return usedCells >= 9;
     }
 
@@ -198,12 +199,12 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
     const playRound = (row, col) => {
         
         board.addMarker(row, col, getCurrentPlayer().token);
+        let gameTie = board.checkTie();
 
         if (board.checkWin() != null){
 
             //Win condition
             let winningToken = board.checkWin();
-            let gameTie = board.checkTie();
             
             
 
@@ -215,11 +216,13 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
                 return true;
             }
 
+            
+        }else{
+
             if (gameTie == true){
                 alert(`Game Tie!`);
                 return true;
             }
-        }else{
 
             switchPlayerTurn();
             printNewRound();
