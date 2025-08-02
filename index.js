@@ -231,7 +231,7 @@ function ScreenController(){
     const form = document.querySelector('.start--form');
     const rows = 3;
     const cols = 3;
-    let gameOver = false;
+        let gameOver = false;
     let gameStart = false;
 
     const updateScreen = () => {
@@ -307,10 +307,20 @@ function ScreenController(){
     startButton.addEventListener("click", startGame);
 
     submit.addEventListener("click", () => {
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        p1Name = data.player1;
+        p2Name = data.player2;
+
         form.reset();
         dialogue.close();
         dialogue.classList.remove("show");
     })
+
+
+
 
     //initially renders the screen
     updateScreen();
