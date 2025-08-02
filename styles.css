@@ -4,6 +4,9 @@
     --header: #fffffe;
     --button: #ff8906;
     --buttonText: #fffffe;
+    --secondary: #f25f4c;
+    --paragraph: #a7a9be;
+    --popupBackground: #2e2f3e;
 }
 body{
     display:flex;
@@ -25,6 +28,14 @@ h2{
 
 h4{
     color: var(--header);
+}
+
+label{
+    color: var(--header);
+}
+
+input{
+    color: var(--paragraph);
 }
 
 .header{
@@ -78,14 +89,12 @@ h4{
 }
 
 .dialogue{
-    width: 500px;
-    height: 500px;
+    width: 300px;
+    height: 300px;
     border: none;
-    padding: 40px;
-}
-
-.dialogue > * {
-    border: 4px solid black;
+    padding: 30px;
+    background-color: var(--popupBackground);
+    border-radius: 10px;
 }
 
 ::backdrop{
@@ -102,6 +111,7 @@ h4{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 0.5;
 }
 
 .start--form{
@@ -112,21 +122,28 @@ h4{
     flex: 1;
 }
 
+.input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .dialogue--footer{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 0.5;
 }
 
 .submit{
 
     border:none;
-    width: 200px;
-    height: 100px;
+    width: 100px;
+    height: 50px;
     background-color: var(--button);
     color: var(--buttonText);
-    font-size: 1.7rem;
-    border-radius: 20px;
+    font-size: 1.5rem;
+    border-radius: 10px;
 }
 
 .submit:hover{
