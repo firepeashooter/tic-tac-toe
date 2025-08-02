@@ -183,6 +183,11 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
 
     }
 
+    const resetGame = () => {
+        board.resetBoard();
+        currPlayer = players[0];
+    }
+
 
     const playRound = (row, col) => {
         
@@ -209,7 +214,7 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
     }
 
 
-    return {playRound, getCurrentPlayer, getBoard: board.getBoard};
+    return {playRound, resetGame, getCurrentPlayer, getBoard: board.getBoard};
 
 }
 
@@ -221,6 +226,9 @@ function ScreenController(){
     const playerTurnHeader = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
     const startButton = document.querySelector('.start--button');
+    const dialogue = document.querySelector('.dialogue');
+    const submit = document.querySelector('.submit');
+    const form = document.querySelector('.start--form');
     const rows = 3;
     const cols = 3;
     let gameOver = false;
@@ -233,7 +241,7 @@ function ScreenController(){
 
         //display current player name
 
-        playerTurnHeader.classList.toggle("alternate--player");
+        
         playerTurnHeader.textContent = currPlayer.name;
 
         //clear the board
@@ -264,11 +272,16 @@ function ScreenController(){
 
     function startGame() {
         gameStart = true;
+        gameOver = false;
 
-        board.resetBoard();
+        game.resetGame();
         updateScreen();
+
+        dialogue.showModal();
+        dialogue.classList.add("show");
+
         
-        //Display Start Menu
+        
     }
 
     function clickHandelerBoard(e){
@@ -292,6 +305,12 @@ function ScreenController(){
 
     boardDiv.addEventListener("click", clickHandelerBoard);
     startButton.addEventListener("click", startGame);
+
+    submit.addEventListener("click", () => {
+        form.reset();
+        dialogue.close();
+        dialogue.classList.remove("show");
+    })
 
     //initially renders the screen
     updateScreen();
