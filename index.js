@@ -31,6 +31,7 @@ function GameBoard(){
     const board = [];
     const rows = 3;
     const cols = 3;
+    let usedCells = 0;
 
     //Creates the board and fills it with cells
     for (let i = 0; i < rows; i++){
@@ -62,6 +63,7 @@ function GameBoard(){
         //If there is no marker already there
         if (cell.getValue() == null){
             cell.setValue(marker);
+            usedCells += 1;
         }else{
             throw new Error("Marker cannot be placed on an existing marker");
         }
@@ -91,6 +93,10 @@ function GameBoard(){
         console.log(`Row 1: ${firstRow}`);
         console.log(`Row 2: ${secondRow}`);
         console.log(`Row 3: ${thirdRow}`);
+    }
+
+    const checkTie = () => {
+        return usedCells >= 9;
     }
 
 
@@ -134,7 +140,7 @@ function GameBoard(){
         return null;
     }
 
-    return {getBoard, addMarker, displayBoard, checkWin, resetBoard};
+    return {getBoard, addMarker, displayBoard, checkWin, checkTie, resetBoard};
 }
 
 
@@ -196,7 +202,13 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
         if (board.checkWin() != null){
 
             //Win condition
-            winningToken = board.checkWin();
+            let winningToken = board.checkWin();
+            let gameTie = board.checkTie();
+            
+            if (gameTie == true){
+                alert(`Game Tie!`);
+                return true;
+            }
 
             if (winningToken == "X"){
                 alert(`Game Over! ${players[0].name} wins!`)
