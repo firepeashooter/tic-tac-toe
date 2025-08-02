@@ -23,7 +23,6 @@ function Cell(){
 
 }
 
-//TODO: MAKE THIS A MODULE INSTEAD OF A FACTORY
 // The Gameboard represents the tic tac toe board
 // it containts a 2D array of Cells.
 function GameBoard(){
@@ -42,15 +41,15 @@ function GameBoard(){
     }
 
     //A fuction to return the board (for later UI display)
-    //Inputs:
-    //Return:
+    //Inputs: None
+    //Return: board - the 2d array representing the board
     const getBoard = () => {
         return board;
     }
 
     //A function that adds a player marker to the specified x, y of the gameboard
-    //Inputs:
-    //Return: true if cell was added, false if cell was not added
+    //Inputs: x, y - integer coordinates, marker - string token 
+    //Return: true - if cell was added, false - if cell was not added
     const addMarker = (x, y, marker)  => {
 
         //If x or y is out of bounds throw an error
@@ -73,6 +72,9 @@ function GameBoard(){
 
     }
 
+    //A function that resets the state of the board by setting all cells back to null
+    //Inputs: None
+    //Return: None
     const resetBoard = () => {
 
         //iterate through the board and set all the cell values to null
@@ -88,25 +90,29 @@ function GameBoard(){
     //A function that displays the gameboard to the console
     //Inputs:
     //Return:
-    const displayBoard = () => {
+    //const displayBoard = () => {
 
-        let firstRow = board[0].map(cell => cell.getValue());
-        let secondRow = board[1].map(cell => cell.getValue());
-        let thirdRow = board[2].map(cell => cell.getValue());
+    //     let firstRow = board[0].map(cell => cell.getValue());
+    //     let secondRow = board[1].map(cell => cell.getValue());
+    //     let thirdRow = board[2].map(cell => cell.getValue());
         
-        console.log(`Row 1: ${firstRow}`);
-        console.log(`Row 2: ${secondRow}`);
-        console.log(`Row 3: ${thirdRow}`);
-    }
+    //     console.log(`Row 1: ${firstRow}`);
+    //     console.log(`Row 2: ${secondRow}`);
+    //     console.log(`Row 3: ${thirdRow}`);
+    // }
 
+
+    //A function that checks if the gamestate is a tie
+    //Inputs: None
+    //Returns: true - if gamestate is a tie, false - if gamestate is not a tie
     const checkTie = () => {
         return usedCells >= 9;
     }
 
 
-    //A funciton that checks if the gameboard is in a winning state, and returns the winning players token
-    //Inputs:
-    //Return: "X" or "O" or null
+    //A function that checks if the gameboard is in a winning state, and returns the winning players token
+    //Inputs:None
+    //Return: "X" or "O" or null, depending on winner
     const checkWin = () => {
 
         //Defines the all possible winning lines
@@ -167,8 +173,8 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
     let currPlayer = players[0];
 
     //A function that switches the active player
-    //Inputs: none
-    //Return: none
+    //Inputs: None
+    //Return: None
     const switchPlayerTurn = () => {
 
         //Can we just check which player is active and then invert it?
@@ -199,6 +205,10 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
     }
 
 
+    //A function that plays a round of tic-tac-toe
+    //Input: row, col - integer values that represent the coordinate of the clicked square
+    //Return: true - if the game is over due to tie or win, false - if marker was failed to be added to square, None - if round 
+     //       plays out normally without win or tie and marker gets added successfuly
     const playRound = (row, col) => {
         
         if (board.addMarker(row, col, getCurrentPlayer().token)){
@@ -244,7 +254,6 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
 }
 
 
-
 function ScreenController(){
 
     const playerTurnHeader = document.querySelector('.turn');
@@ -259,6 +268,10 @@ function ScreenController(){
     let gameOver = false;
     let gameStart = false;
 
+
+    //A function to handle the inital rendering of the screen before the GameBoard object is created
+    //Input: None
+    //Return: None
     const initialRender = () => {
         for (let i = 0; i < rows; i ++){
             for (let j = 0; j < cols; j++){
@@ -269,6 +282,10 @@ function ScreenController(){
         }
     };
 
+
+    //A function to handle updating the screen after a player has places their marker (or any other screen changes occur)
+    //Input: None
+    //Return None
     const updateScreen = () => {
 
         const board = game.getBoard();
@@ -303,18 +320,22 @@ function ScreenController(){
         }
     }
 
-       
 
+    //A function to start the game
+    //Input: None
+    //Return: None
     function startGame() {
         gameStart = true;
         gameOver = false;
 
         dialogue.showModal();
-        dialogue.classList.add("show");
-        
+        dialogue.classList.add("show");  
     }
 
 
+    //A function to handle the user input of the board
+    //Input: e - the event that was triggered, used for grabbing the coordinate of which cell was clicked
+    //Return: None
     function clickHandelerBoard(e){
 
         if (gameOver){
@@ -345,6 +366,8 @@ function ScreenController(){
         updateScreen();
     }
 
+
+    //Even Listeners for the html elements
     boardDiv.addEventListener("click", clickHandelerBoard);
     startButton.addEventListener("click", startGame);
 
@@ -380,8 +403,8 @@ function ScreenController(){
 
     //initially renders the screen
     initialRender();
-    console.log("initially rendered");
 }
 
+//Starts Everything
 ScreenController();
 
