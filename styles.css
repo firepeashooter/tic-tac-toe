@@ -34,9 +34,6 @@ label{
     color: var(--header);
 }
 
-input{
-    color: var(--paragraph);
-}
 
 .header{
 
@@ -81,11 +78,11 @@ input{
 }
 
 .start--button:hover{
-    background-color: #555F6B;
+    background-color: #ffac33;
 }
 
 .start--button:active{
-    background-color: #3A434C;
+    background-color: #cc7000;
 }
 
 .dialogue{
@@ -147,17 +144,13 @@ input{
 }
 
 .submit:hover{
-    background-color: #555F6B;
+    background-color: #ffac33;
 }
 
 .submit:active{
-    background-color: #3A434C;
+    background-color: #cc7000;
 }
 
-
-.alternate--player{
-    color: #FFA500;
-}
 
 .board{
 
@@ -179,6 +172,10 @@ input{
     justify-content: center;
     align-items: center;
     border: 4px solid var(--header);
+}
+
+.cell.active{
+    border-color: #e53170;
 }
 
 .footer{

@@ -50,7 +50,7 @@ function GameBoard(){
 
     //A function that adds a player marker to the specified x, y of the gameboard
     //Inputs:
-    //Return:
+    //Return: true if cell was added, false if cell was not added
     const addMarker = (x, y, marker)  => {
 
         //If x or y is out of bounds throw an error
@@ -64,9 +64,13 @@ function GameBoard(){
         if (cell.getValue() == null){
             cell.setValue(marker);
             usedCells += 1;
+            return true;
         }else{
-            throw new Error("Marker cannot be placed on an existing marker");
+            console.log('Cannot Place a marker on an existing one');
+            return false;
         }
+
+
     }
 
     const resetBoard = () => {
@@ -96,7 +100,7 @@ function GameBoard(){
     }
 
     const checkTie = () => {
-        console.log(usedCells);
+        return usedCells >= 9;
     }
 
 
@@ -197,35 +201,40 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
 
     const playRound = (row, col) => {
         
-        board.addMarker(row, col, getCurrentPlayer().token);
-        let gameTie = board.checkTie();
+        if (board.addMarker(row, col, getCurrentPlayer().token)){
 
-        if (board.checkWin() != null){
+        
+            let gameTie = board.checkTie();
 
-            //Win condition
-            let winningToken = board.checkWin();
+            if (board.checkWin() != null){
+
+                //Win condition
+                let winningToken = board.checkWin();
             
             
 
-            if (winningToken == "X"){
-                alert(`Game Over! ${players[0].name} wins!`)
-                return true;
-            }else if (winningToken == "O"){
-                alert(`Game Over! ${players[1].name} wins!`)
-                return true;
+                if (winningToken == "X"){
+                    alert(`Game Over! ${players[0].name} wins!`)
+                    return true;
+                }else if (winningToken == "O"){
+                    alert(`Game Over! ${players[1].name} wins!`)
+                    return true;
+                }
+
+            
+            }else{
+
+                if (gameTie == true){
+                    alert(`Game Tie!`);
+                    return true;
+                }
+
+                switchPlayerTurn();
+                printNewRound();
             }
-
-            
         }else{
-
-            if (gameTie == true){
-                alert(`Game Tie!`);
-                return true;
-            }
-
-            switchPlayerTurn();
-            printNewRound();
-        }
+            return false;
+        };
         
     }
 
@@ -249,6 +258,16 @@ function ScreenController(){
     let game;
     let gameOver = false;
     let gameStart = false;
+
+    const initialRender = () => {
+        for (let i = 0; i < rows; i ++){
+            for (let j = 0; j < cols; j++){
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+                boardDiv.appendChild(cell);
+            }
+        }
+    };
 
     const updateScreen = () => {
 
@@ -310,8 +329,19 @@ function ScreenController(){
         const selectedRow = parseInt(e.target.dataset.row);
         const selectedCol = parseInt(e.target.dataset.col);
 
+        let returnCode = game.playRound(selectedRow, selectedCol);
+        
+        if (returnCode == true){
+            gameOver = true;
+        }else if (returnCode == false){
+            let cell = e.target.closest(".cell");
 
-        gameOver = game.playRound(selectedRow, selectedCol);
+            cell.classList.add("active");
+
+            setTimeout(() => {cell.classList.remove("active")}, 100);
+            return;
+        }
+            
         updateScreen();
     }
 
@@ -349,7 +379,8 @@ function ScreenController(){
 
 
     //initially renders the screen
-    // updateScreen();
+    initialRender();
+    console.log("initially rendered");
 }
 
 ScreenController();
