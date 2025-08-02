@@ -222,7 +222,6 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
 
 function ScreenController(){
 
-    const game = GameController();
     const playerTurnHeader = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
     const startButton = document.querySelector('.start--button');
@@ -231,7 +230,8 @@ function ScreenController(){
     const form = document.querySelector('.start--form');
     const rows = 3;
     const cols = 3;
-        let gameOver = false;
+    let game;
+    let gameOver = false;
     let gameStart = false;
 
     const updateScreen = () => {
@@ -242,7 +242,7 @@ function ScreenController(){
         //display current player name
 
         
-        playerTurnHeader.textContent = currPlayer.name;
+        playerTurnHeader.textContent = currPlayer.name + '\'s Turn';
 
         //clear the board
         boardDiv.textContent = '';
@@ -274,15 +274,11 @@ function ScreenController(){
         gameStart = true;
         gameOver = false;
 
-        game.resetGame();
-        updateScreen();
-
         dialogue.showModal();
         dialogue.classList.add("show");
-
-        
         
     }
+
 
     function clickHandelerBoard(e){
 
@@ -311,8 +307,22 @@ function ScreenController(){
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        p1Name = data.player1;
-        p2Name = data.player2;
+        let p1Name = data.player1;
+        let p2Name = data.player2;
+
+        if (p1Name == ''){
+            p1Name = "Player 1";
+        }
+
+        if (p2Name == ''){
+            p2Name = "Player 2";
+        }
+        
+        game = GameController(p1Name, p2Name);
+
+        game.resetGame();
+        updateScreen();
+
 
         form.reset();
         dialogue.close();
@@ -323,7 +333,7 @@ function ScreenController(){
 
 
     //initially renders the screen
-    updateScreen();
+    // updateScreen();
 }
 
 ScreenController();
