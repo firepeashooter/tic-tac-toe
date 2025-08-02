@@ -67,6 +67,17 @@ function GameBoard(){
         }
     }
 
+    const resetBoard = () => {
+
+        //iterate through the board and set all the cell values to null
+
+        for (let i = 0; i < rows; i++){
+            for (let j = 0; j < cols; j++){
+                board[i][j].setValue(null);
+            }
+        }
+    }
+
 
     //A function that displays the gameboard to the console
     //Inputs:
@@ -123,7 +134,7 @@ function GameBoard(){
         return null;
     }
 
-    return {getBoard, addMarker, displayBoard, checkWin};
+    return {getBoard, addMarker, displayBoard, checkWin, resetBoard};
 }
 
 
@@ -249,13 +260,15 @@ function ScreenController(){
         }
     }
 
-    const resetScreen = () => {
-        
-    }
+       
 
     function startGame() {
         gameStart = true;
-        resetScreen();
+
+        board.resetBoard();
+        updateScreen();
+        
+        //Display Start Menu
     }
 
     function clickHandelerBoard(e){
